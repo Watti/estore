@@ -39,10 +39,13 @@
                 </div>
             </div>
             <div id="content-div">
-                <?php $this->load->view($main_content); ?>
+                <div class="container-fluid">
+                    <div class="row">
+                        <?php $this->load->view($main_content); ?>
+                    </div>
+                </div>
+                
             </div>
-
-
             <footer>
                 <hr/>
                 <p class="text-center">

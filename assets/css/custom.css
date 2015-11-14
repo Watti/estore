@@ -47,3 +47,12 @@
     color : #66afe9;
     font-style: italic;
 }
+
+#content-div {
+    padding: 5px 15px 5px 15px;
+}
+
+#login-form {
+    width: 400px;
+    margin: 0 auto;
+}

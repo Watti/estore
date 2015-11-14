@@ -1,19 +1,23 @@
-Login Page
-
-<br/>
-<br/>
-
-<form id="login-form" method="post" action="<?php echo base_url(); ?>user/authenticate">
-    <label for="username">Username</label>
-    <br/>
-    <input type="text" name="username" placeholder="Enter Username"/>
-    <br/>
-    <label for="password">Password</label>
-    <br/>
-    <input type="password" name="password" placeholder="Enter Password"/>
-    <br/>
-    <input type="submit" value="Login"/>
-</form>
+<div id="login-form" class="panel panel-default">
+    <div id="login-form-title" class="panel-heading">
+        <h4>Login</h4>
+    </div>
+    <div id="form-div" class="panel-body">
+        <form method="post" action="<?php echo base_url(); ?>user/authenticate">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" type="text" name="username" placeholder="Enter Username" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter Password"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary"/>
+            </div>
+        </form>        
+    </div>
+</div>
 
 <br/>
 
