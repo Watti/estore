@@ -33,8 +33,11 @@
 }
 
 .navbar-right {
-    margin-right: 0px;
     height: 40px;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0px;
 }
 
 .navbar-text {
