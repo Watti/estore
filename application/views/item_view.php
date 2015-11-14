@@ -1,5 +1,6 @@
 <div id="item-div">
-    <table class="table table-hover">
+    <h4>Items</h4>
+    <table class="table table-hover table-condensed table-bordered">
         <thead>
         <th>Item Code</th>
         <th>Item Type</th>
@@ -24,8 +25,10 @@
                     <td><?php echo $item->unit_price; ?></td>
                     <td><?php echo $item->remarks; ?></td>
                     <td>
-                        <button type="button" class="btn btn-warning btn-xs">Update</button>
-                        <button type="button" class="btn btn-danger btn-xs">Delete</button>
+                        <a class="btn btn-warning btn-xs" role="button"
+                           href="<?php echo base_url(); ?>item/update/<?php echo urlencode(base64_encode($item->id)); ?>">Update</a>
+                        <a class="btn btn-danger btn-xs" role="button"
+                           href="<?php echo base_url(); ?>item/delete/<?php echo urlencode(base64_encode($item->id)); ?>">Delete</a>
                     </td>
                 </tr>
                 <?php
@@ -33,4 +36,7 @@
             ?>
         </tbody>
     </table>
+    <br/>
+    <a class="btn btn-primary" href="<?php echo base_url(); ?>item/add" role="button">Add New Item</a>
+    <br/>
 </div>

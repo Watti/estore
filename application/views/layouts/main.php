@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>eStore - An Inventory System</title>
+        <title>EStore - An Inventory System</title>
         <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet"/>
     </head>
