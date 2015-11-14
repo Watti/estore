@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2015 at 05:40 PM
+-- Generation Time: Nov 14, 2015 at 06:33 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -17,11 +17,58 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `estore`
+-- Database: `goldfish`
 --
-create database estore;
+create database goldfish;
+use goldfish;
+-- --------------------------------------------------------
 
-use estore;
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `usertype_id` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `display_name` varchar(255) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `usertype_id`, `created_date`, `display_name`, `active`) VALUES
+(1, 'shan', '202cb962ac59075b964b07152d234b70', 2, '2015-11-14 04:44:36', 'Shan', 1),
+(2, 'indunil', '202cb962ac59075b964b07152d234b70', 2, '2015-11-14 04:44:36', 'Indunil', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usertype`
+--
+
+CREATE TABLE IF NOT EXISTS `usertype` (
+  `usertype_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usertype_name` varchar(255) NOT NULL,
+  `permission` text NOT NULL,
+  PRIMARY KEY (`usertype_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `usertype`
+--
+
+INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
+(1, 'DEV', ''),
+(2, 'MANAGER', ''),
+(3, 'STORE KEEPER', ''),
+(4, 'CASHIER', '');
+
 -- --------------------------------------------------------
 
 --
