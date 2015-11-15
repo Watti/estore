@@ -10,10 +10,22 @@
         <div id="main-div">
             <div class="navbar navbar-inverse">
                 <div class="navbar-inner">
-                    <a class="navbar-brand" href="#"><img alt="Brand" src="<?php echo base_url(); ?>assets/images/logo2.png"></a>
+                    <a class="navbar-brand" href="<?php echo base_url(); ?>"><img alt="Brand" src="<?php echo base_url(); ?>assets/images/logo2.png"></a>
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li><a href="<?php echo base_url(); ?>item">Item</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Stock <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo base_url(); ?>item">Items</a></li>
+                                <li><a href="<?php echo base_url(); ?>itemcategory">Item Categories</a></li>
+                                <li><a href="<?php echo base_url(); ?>itemprice">Item Prices</a></li>
+                                <li><a href="<?php echo base_url(); ?>#">Stock Items</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="<?php echo base_url(); ?>item">Items</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Sales</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Orders</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Reports</a></li>
+                        <li><a href="<?php echo base_url(); ?>">Help</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <?php

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2015 at 06:33 AM
+-- Generation Time: Nov 15, 2015 at 04:09 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -21,6 +21,94 @@ SET time_zone = "+00:00";
 --
 create database goldfish;
 use goldfish;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item`
+--
+
+CREATE TABLE IF NOT EXISTS `item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `itemcategory_id` int(11) NOT NULL,
+  `item_code` varchar(20) NOT NULL,
+  `item_name` varchar(50) NOT NULL,
+  `bar_code` varchar(25) NOT NULL,
+  `unit` varchar(25) NOT NULL,
+  `description` text NOT NULL,
+  `deleted` tinyint(4) NOT NULL,
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `item`
+--
+
+INSERT INTO `item` (`item_id`, `itemcategory_id`, `item_code`, `item_name`, `bar_code`, `unit`, `description`, `deleted`) VALUES
+(3, 2, 'SP001', 'Soup A', '20215435', 'Pcs', 'This is Soup A', 0),
+(4, 2, 'OL_098', 'Coconut Oil', '9438589', 'L', 'This is Coconut Oil', 0),
+(5, 2, 'BV044', 'Smak', '34957934', 'L', 'This is SMAK', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_category`
+--
+
+CREATE TABLE IF NOT EXISTS `item_category` (
+  `itemcategory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `itemcategory_code` varchar(255) NOT NULL,
+  `itemcategory_name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `deleted` tinyint(4) NOT NULL,
+  PRIMARY KEY (`itemcategory_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `item_category`
+--
+
+INSERT INTO `item_category` (`itemcategory_id`, `itemcategory_code`, `itemcategory_name`, `description`, `deleted`) VALUES
+(2, 'CAT_001', 'CATEGORY_A', 'This is A Category', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_price`
+--
+
+CREATE TABLE IF NOT EXISTS `item_price` (
+  `itemprice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `itemprice_code` varchar(20) NOT NULL,
+  `unit_price` float(10,2) NOT NULL,
+  `discount_type` int(11) NOT NULL,
+  `deleted` tinyint(4) NOT NULL,
+  PRIMARY KEY (`itemprice_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `item_price`
+--
+
+INSERT INTO `item_price` (`itemprice_id`, `itemprice_code`, `unit_price`, `discount_type`, `deleted`) VALUES
+(1, 'IP_001', 270.00, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stock`
+--
+
+CREATE TABLE IF NOT EXISTS `stock` (
+  `stock_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(11) NOT NULL,
+  `itemprice_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `min_qty` int(11) NOT NULL,
+  `deleted` tinyint(4) NOT NULL,
+  PRIMARY KEY (`stock_id`),
+  UNIQUE KEY `item_id` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --
@@ -68,33 +156,6 @@ INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
 (2, 'MANAGER', ''),
 (3, 'STORE KEEPER', ''),
 (4, 'CASHIER', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `item`
---
-
-CREATE TABLE IF NOT EXISTS `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL,
-  `bar_code` varchar(25) NOT NULL,
-  `unit` varchar(25) NOT NULL,
-  `quantity` double NOT NULL,
-  `unit_price` double NOT NULL,
-  `minimum_quantity` float NOT NULL,
-  `remarks` varchar(250) NOT NULL,
-  `item_code` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`id`, `type`, `bar_code`, `unit`, `quantity`, `unit_price`, `minimum_quantity`, `remarks`, `item_code`) VALUES
-(1, 'Soap', '123', 'pcs', 500, 40, 10, '', 1),
-(2, 'Rice', '222', 'Kg', 25, 80, 5, '', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

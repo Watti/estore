@@ -4,13 +4,13 @@ class Item_model extends CI_Model {
 
     public function add_item() {
         $data = array(
-            'type' => $this->input->post('item_type'),
+            'itemcategory_id' => $this->input->post('itemcategory_id'),
+            'item_code' => $this->input->post('item_code'),
+            'item_name' => $this->input->post('item_name'),
             'bar_code' => $this->input->post('bar_code'),
             'unit' => $this->input->post('unit'),
-            'quantity' => $this->input->post('quantity'),
-            'minimum_quantity' => $this->input->post('minimum_quantity'),
-            'remarks' => $this->input->post('remarks'),
-            'item_code' => $this->input->post('item_code')
+            'description' => $this->input->post('description'),
+            'deleted' => 0
         );
 
         $this->db->insert('item', $data);
@@ -18,25 +18,25 @@ class Item_model extends CI_Model {
 
     public function update_item() {
         $data = array(
-            'type' => $this->input->post('item_type'),
+            'itemcategory_id' => $this->input->post('itemcategory_id'),
+            'item_code' => $this->input->post('item_code'),
+            'item_name' => $this->input->post('item_name'),
             'bar_code' => $this->input->post('bar_code'),
             'unit' => $this->input->post('unit'),
-            'quantity' => $this->input->post('quantity'),
-            'minimum_quantity' => $this->input->post('minimum_quantity'),
-            'remarks' => $this->input->post('remarks'),
-            'item_code' => $this->input->post('item_code')
+            'description' => $this->input->post('description'),
+            'deleted' => $this->input->post('deleted')
         );
 
-        $this->db->where('id', $this->input->post('item_id'));
+        $this->db->where('item_id', $this->input->post('item_id'));
         $this->db->update('item', $data);
     }
     
     public function delete_item($item_id) {
-        $this->db->delete('item', array('id' => $item_id));
+        $this->db->delete('item', array('item_id' => $item_id));
     }
 
     public function get_item_by_id($item_id) {
-        $this->db->where('id', $item_id);
+        $this->db->where('item_id', $item_id);
         $result = $this->db->get('item');
 
         if ($result->num_rows() > 0) {
