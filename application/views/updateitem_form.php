@@ -2,7 +2,7 @@
 $item = $this->item_model->get_item_by_id($item_id);
 $itemcategories = $this->itemcategory_model->get_all_item_categories();
 ?>
-<div id="additem-form" class="panel panel-default">
+<div id="updateitem-form" class="panel panel-default">
     <div class="panel-heading" class="panel-heading">
         <h4>Update Item</h4>
     </div>
