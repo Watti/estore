@@ -74,7 +74,7 @@ class User extends CI_Controller {
         );
 
         $this->session->set_userdata($userData);
-        $user_page = strtolower($usertype->usertype_name); // This will load the usertype controller
+        $user_page = str_replace(' ', '', strtolower($usertype->usertype_name)); // This will load the usertype controller
 
         redirect(base_url() . $user_page);
     }
