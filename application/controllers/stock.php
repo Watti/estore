@@ -47,8 +47,11 @@ class Stock extends CI_Controller {
         redirect(base_url() . 'stock');
     }
     
-    public function delete_db() {
-        
+    public function delete_db($stock_id) {
+        $this->load->model('stock_model');
+        $this->stock_model->delete_stockitem(base64_decode(urldecode($stock_id)));
+
+        redirect(base_url() . 'stock');
     }
     
 }

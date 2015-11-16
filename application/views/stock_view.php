@@ -14,14 +14,13 @@
         </thead>
         <tbody>
             <?php
-            $all_stockitems = $this->stock_model->get_all_stockitems();
-            foreach ($all_stockitems as $stock_item):
-                $item = $this->item_model->get_item_by_id($stock_item->item_id);
-                if ($item) {
-                    $itemcategory = $this->itemcategory_model->get_item_category_by_id($item->itemcategory_id);
+            $all_items = $this->item_model->get_all_items();
+            foreach ($all_items as $item):
+                $stock_item = $this->stock_model->get_stockitem_by_item_id($item->item_id);
+                if ($stock_item) {
+                    $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
                 }
-                $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
-                
+                $itemcategory = $this->itemcategory_model->get_item_category_by_id($item->itemcategory_id);
                 ?>
                 <tr>
                     <td><?php echo $item->item_code; ?></td>
@@ -48,13 +47,13 @@
                     <td>
                         <?php if ($stock_item): ?>
                         <a class="btn btn-warning btn-xs" role="button"
-                           href="<?php echo base_url(); ?>stock/update/<?php echo urlencode(base64_encode($item->item_id)); ?>">Update Stock Item</a>
+                           href="<?php echo base_url(); ?>stock/update/<?php echo urlencode(base64_encode($item->item_id)); ?>">Update</a>
+                        <a class="btn btn-danger btn-xs" role="button"
+                           href="<?php echo base_url(); ?>stock/delete_db/<?php echo urlencode(base64_encode($stock_item->stock_id)); ?>">Remove</a>
                         <?php else: ?>
                         <a class="btn btn-success btn-xs" role="button"
                            href="<?php echo base_url(); ?>stock/add/<?php echo urlencode(base64_encode($item->item_id)); ?>">Add To Stock</a>
                         <?php endif; ?>
-                        <a class="btn btn-danger btn-xs" role="button"
-                           href="<?php echo base_url(); ?>stock/delete_db/<?php echo urlencode(base64_encode($item->item_id)); ?>">Delete</a>
                     </td>
                 </tr>
                 <?php
