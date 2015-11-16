@@ -50,4 +50,4 @@
 <div>
     Item Categories are empty. Please go <a href="<?php echo base_url(); ?>itemcategory">here</a> to add some categories.
 </div>
-<?php endif; ?>
+<?php endif; 

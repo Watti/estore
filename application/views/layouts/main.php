@@ -15,13 +15,17 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Stock <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url(); ?>item">Items</a></li>
-                                <li><a href="<?php echo base_url(); ?>itemcategory">Item Categories</a></li>
-                                <li><a href="<?php echo base_url(); ?>itemprice">Item Prices</a></li>
-                                <li><a href="<?php echo base_url(); ?>#">Stock Items</a></li>
+                                <li><a href="<?php echo base_url(); ?>stock">Manage Stock Items</a></li>
                             </ul>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>item">Items</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Items <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php echo base_url(); ?>item">Manage Items</a></li>
+                                <li><a href="<?php echo base_url(); ?>itemcategory">Manage Item Categories</a></li>
+                                <li><a href="<?php echo base_url(); ?>itemprice">Manage Item Prices</a></li>
+                            </ul>
+                        </li>
                         <li><a href="<?php echo base_url(); ?>">Sales</a></li>
                         <li><a href="<?php echo base_url(); ?>">Orders</a></li>
                         <li><a href="<?php echo base_url(); ?>">Reports</a></li>

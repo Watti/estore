@@ -48,6 +48,14 @@ $itemcategories = $this->itemcategory_model->get_all_item_categories();
                 <textarea class="form-control" name="description"><?php echo $item->description; ?></textarea>
             </div>
             <div class="form-group">
+                <label for="deleted">Deleted ?</label>
+                <?php if($item->deleted) : ?>
+                <input type="checkbox" name="deleted" value="1" checked />
+                <?php else: ?>
+                <input type="checkbox" name="deleted" value="1" />
+                <?php endif; ?>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Update" class="btn btn-primary"/>
             </div>
         </form>        

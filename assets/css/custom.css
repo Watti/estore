@@ -62,7 +62,7 @@
 
 #additem-form, #updateitem-form, #additemcategory-form,
 #updateitemcategory-form, #additemprice-form, #updateitemprice-form,
-#addstockitem-form {
+#addstockitem-form, #editstockitem-form {
     width: 600px;
     margin: 0 auto;
 }
