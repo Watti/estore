@@ -17,6 +17,11 @@ class Item_model extends CI_Model {
     }
 
     public function update_item() {
+        $checked = 0;
+        if ($this->input->post('deleted')) {
+            $checked = 1;
+        }
+            
         $data = array(
             'itemcategory_id' => $this->input->post('itemcategory_id'),
             'item_code' => $this->input->post('item_code'),
@@ -24,7 +29,7 @@ class Item_model extends CI_Model {
             'bar_code' => $this->input->post('bar_code'),
             'unit' => $this->input->post('unit'),
             'description' => $this->input->post('description'),
-            'deleted' => $this->input->post('deleted')
+            'deleted' => $checked
         );
 
         $this->db->where('item_id', $this->input->post('item_id'));
