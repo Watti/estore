@@ -26,7 +26,7 @@
                                 <li><a href="<?php echo base_url(); ?>itemprice">Manage Item Prices</a></li>
                             </ul>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>">Sales</a></li>
+                        <li><a href="<?php echo base_url(); ?>addbill">Billing</a></li>
                         <li><a href="<?php echo base_url(); ?>">Orders</a></li>
                         <li><a href="<?php echo base_url(); ?>">Reports</a></li>
                         <li><a href="<?php echo base_url(); ?>">Help</a></li>
