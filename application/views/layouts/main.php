@@ -22,7 +22,7 @@
                             </ul>
                         </li>
                         <li><a href="<?php echo base_url(); ?>item">Items</a></li>
-                        <li><a href="<?php echo base_url(); ?>">Sales</a></li>
+                        <li><a href="<?php echo base_url(); ?>addbill">Billing</a></li>
                         <li><a href="<?php echo base_url(); ?>">Orders</a></li>
                         <li><a href="<?php echo base_url(); ?>">Reports</a></li>
                         <li><a href="<?php echo base_url(); ?>">Help</a></li>

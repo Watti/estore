@@ -60,7 +60,7 @@
     margin: 0 auto;
 }
 
-#additem-form, #updateitem-form, #additemcategory-form,
+#additem-form, #updateitem-form, #additemcategory-form,#addbill-form
 #updateitemcategory-form, #additemprice-form, #updateitemprice-form {
     width: 600px;
     margin: 0 auto;
