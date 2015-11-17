@@ -17,6 +17,7 @@ class User extends CI_Controller {
         $this->session->unset_userdata('display_name');
         $this->session->unset_userdata('usertype');
         $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('permission');
         $this->session->sess_destroy();
 
         redirect(base_url());
@@ -70,13 +71,15 @@ class User extends CI_Controller {
             'username' => $user->username,
             'display_name' => $user->display_name,
             'usertype' => $usertype->usertype_name,
+            'permission' => $usertype->permission,
             'logged_in' => TRUE
         );
 
         $this->session->set_userdata($userData);
         $user_page = str_replace(' ', '', strtolower($usertype->usertype_name)); // This will load the usertype controller
 
-        redirect(base_url() . $user_page);
+        //redirect(base_url() . $user_page);
+        redirect(base_url());
     }
 
 }

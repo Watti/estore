@@ -50,7 +50,7 @@
                                 <a class="btn btn-warning btn-xs" role="button"
                                    href="<?php echo base_url(); ?>stock/update/<?php echo urlencode(base64_encode($item->item_id)); ?>">Update</a>
                                 <a class="btn btn-danger btn-xs" role="button"
-                                   href="<?php echo base_url(); ?>stock/delete_db/<?php echo urlencode(base64_encode($stock_item->stock_id)); ?>">Remove</a>
+                                   href="<?php echo base_url(); ?>stock/delete/<?php echo urlencode(base64_encode($stock_item->stock_id)); ?>">Remove</a>
                                <?php else: ?>
                                 <a class="btn btn-success btn-xs" role="button"
                                    href="<?php echo base_url(); ?>stock/add/<?php echo urlencode(base64_encode($item->item_id)); ?>">Add To Stock</a>
