@@ -1,3 +1,20 @@
+<?php
+
+function hasPermission($url) {
+    if (!$_SESSION || !isset($_SESSION['permission'])) {
+        return FALSE;
+    }
+    $perm = $_SESSION['permission'];
+    if ($perm) {
+        $permission = explode(",", $perm);
+        if (in_array($url, $permission)) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,21 +29,27 @@
                 <div class="navbar-inner">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>"><img alt="Brand" src="<?php echo base_url(); ?>assets/images/logo2.png"></a>
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Stock <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url(); ?>stock">Manage Stock Items</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Items <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url(); ?>item">Manage Items</a></li>
-                                <li><a href="<?php echo base_url(); ?>itemcategory">Manage Item Categories</a></li>
-                                <li><a href="<?php echo base_url(); ?>itemprice">Manage Item Prices</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="<?php echo base_url(); ?>bill">Billing</a></li>
+                        <?php if (hasPermission("stock")) : ?>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Stock <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>stock">Manage Stock Items</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (hasPermission("item")) : ?>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Items <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>item">Manage Items</a></li>
+                                    <li><a href="<?php echo base_url(); ?>itemcategory">Manage Item Categories</a></li>
+                                    <li><a href="<?php echo base_url(); ?>itemprice">Manage Item Prices</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (hasPermission("bill")) : ?>
+                            <li><a href="<?php echo base_url(); ?>bill">Billing</a></li>
+                        <?php endif; ?>
                         <li><a href="<?php echo base_url(); ?>">Orders</a></li>
                         <li><a href="<?php echo base_url(); ?>">Reports</a></li>
                         <li><a href="<?php echo base_url(); ?>">Help</a></li>
