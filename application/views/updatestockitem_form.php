@@ -2,7 +2,7 @@
     $stockitem = $this->stock_model->get_stockitem_by_item_id($item_id);
     $itemprices = $this->itemprice_model->get_all_item_prices();
 ?>
-<div id="editstockitem-form" class="panel panel-default">
+<div id="updatestockitem-form" class="panel panel-default">
     <div class="panel-heading" class="panel-heading">
         <h4>Edit Stock Item</h4>
     </div>

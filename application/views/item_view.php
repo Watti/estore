@@ -15,44 +15,52 @@
         <tbody>
             <?php
             $all_items = $this->item_model->get_all_items();
-            foreach ($all_items as $item):
-                $stock_item = $this->stock_model->get_stockitem_by_item_id($item->item_id);
-                if ($stock_item) {
-                    $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
-                }
-                $itemcategory = $this->itemcategory_model->get_item_category_by_id($item->itemcategory_id);
+            if ($all_items) :
+                foreach ($all_items as $item):
+                    $stock_item = $this->stock_model->get_stockitem_by_item_id($item->item_id);
+                    if ($stock_item) {
+                        $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
+                    }
+                    $itemcategory = $this->itemcategory_model->get_item_category_by_id($item->itemcategory_id);
+                    ?>
+                    <tr>
+                        <td><?php echo $item->item_code; ?></td>
+                        <td><?php echo $item->item_name; ?></td>
+                        <td><?php echo $itemcategory->itemcategory_name; ?></td>
+
+                        <?php if ($stock_item): ?>
+                            <td><?php echo $stock_item->qty; ?></td>
+                            <td><?php echo $stock_item->min_qty; ?></td>
+                        <?php else: ?>
+                            <td>Not in Stock</td>
+                            <td>Not in Stock</td>
+                        <?php endif; ?>
+
+                        <td><?php echo $item->unit; ?></td>
+
+                        <?php if ($stock_item && $itemprice): ?>
+                            <td><?php echo $itemprice->unit_price; ?></td>
+                        <?php else: ?>
+                            <td>Not in Stock</td>
+                        <?php endif; ?>
+
+                        <td><?php echo $item->description; ?></td>
+                        <td>
+                            <a class="btn btn-warning btn-xs" role="button"
+                               href="<?php echo base_url(); ?>item/update/<?php echo urlencode(base64_encode($item->item_id)); ?>">Update</a>
+                            <a class="btn btn-danger btn-xs" role="button"
+                               href="<?php echo base_url(); ?>item/delete/<?php echo urlencode(base64_encode($item->item_id)); ?>">Delete</a>
+                        </td>
+                    </tr>
+                    <?php
+                endforeach;
+            else:
                 ?>
                 <tr>
-                    <td><?php echo $item->item_code; ?></td>
-                    <td><?php echo $item->item_name; ?></td>
-                    <td><?php echo $itemcategory->itemcategory_name; ?></td>
-                    
-                    <?php if ($stock_item): ?>
-                        <td><?php echo $stock_item->qty; ?></td>
-                        <td><?php echo $stock_item->min_qty; ?></td>
-                    <?php else: ?>
-                        <td>Not in Stock</td>
-                        <td>Not in Stock</td>
-                    <?php endif; ?>
-                                        
-                    <td><?php echo $item->unit; ?></td>
-                    
-                    <?php if ($stock_item && $itemprice): ?>
-                        <td><?php echo $itemprice->unit_price; ?></td>
-                    <?php else: ?>
-                        <td>Not in Stock</td>
-                    <?php endif; ?>
-                    
-                    <td><?php echo $item->description; ?></td>
-                    <td>
-                        <a class="btn btn-warning btn-xs" role="button"
-                           href="<?php echo base_url(); ?>item/update/<?php echo urlencode(base64_encode($item->item_id)); ?>">Update</a>
-                        <a class="btn btn-danger btn-xs" role="button"
-                           href="<?php echo base_url(); ?>item/delete/<?php echo urlencode(base64_encode($item->item_id)); ?>">Delete</a>
-                    </td>
-                </tr>
-                <?php
-            endforeach;
+                    <td colspan="9">No Entries</td>
+                </tr>        
+            <?php
+            endif;
             ?>
         </tbody>
     </table>

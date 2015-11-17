@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2015 at 04:09 PM
+-- Generation Time: Nov 16, 2015 at 06:17 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,16 +37,26 @@ CREATE TABLE IF NOT EXISTS `item` (
   `description` text NOT NULL,
   `deleted` tinyint(4) NOT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `item`
 --
 
 INSERT INTO `item` (`item_id`, `itemcategory_id`, `item_code`, `item_name`, `bar_code`, `unit`, `description`, `deleted`) VALUES
-(3, 2, 'SP001', 'Soup A', '20215435', 'Pcs', 'This is Soup A', 0),
-(4, 2, 'OL_098', 'Coconut Oil', '9438589', 'L', 'This is Coconut Oil', 0),
-(5, 2, 'BV044', 'Smak', '34957934', 'L', 'This is SMAK', 0);
+(6, 3, 'RC0001', 'Rice (Samba)', '345444', 'Kg', 'None', 0),
+(7, 3, 'RC0002', 'Rice (Nadu)', '125854', 'Kg', 'None', 0),
+(8, 3, 'RC0005', 'Rice (Kekulu)', '889221', 'Kg', 'Red Kekulu', 0),
+(9, 4, 'BT3300', 'Cream Cracker', '445621', 'g', 'Maliban', 0),
+(10, 4, 'BT4923', 'Marie', '778323', 'g', '', 0),
+(11, 4, 'BT8332', 'Lemon Puff', '125853', 'g', '', 0),
+(12, 5, 'SP8000', 'Soap (Sunlight)', '733244', 'Pcs', '', 0),
+(13, 5, 'SP0014', 'Soap (Vim)', '900008', 'Pcs', '', 0),
+(14, 5, 'SP0333', 'Soap (Lux)', '332221', 'Pcs', '', 0),
+(15, 6, 'ND5577', 'Noodles', '342217', 'Pkts', '', 0),
+(16, 7, 'EG0888', 'Farm Eggs', '112200', 'Box', '', 0),
+(17, 8, 'CO0022', 'Coconut Oil', '433221', 'L', '', 0),
+(18, 8, 'CO0012', 'Vegitable Oil', '667422', 'L', '', 0);
 
 -- --------------------------------------------------------
 
@@ -61,14 +71,19 @@ CREATE TABLE IF NOT EXISTS `item_category` (
   `description` text NOT NULL,
   `deleted` tinyint(4) NOT NULL,
   PRIMARY KEY (`itemcategory_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `item_category`
 --
 
 INSERT INTO `item_category` (`itemcategory_id`, `itemcategory_code`, `itemcategory_name`, `description`, `deleted`) VALUES
-(2, 'CAT_001', 'CATEGORY_A', 'This is A Category', 0);
+(3, 'RC044', 'Rice', 'This is Rice Category', 0),
+(4, 'BT321', 'Biscuit', 'This is Biscuit Category', 0),
+(5, 'SP901', 'Soap', 'This is Soap Category', 0),
+(6, 'ND441', 'Noodles', 'This is Noodles Category', 0),
+(7, 'EG020', 'Egg', 'This is Egg Category', 0),
+(8, 'CO116', 'Oil', 'This is Oil Category', 0);
 
 -- --------------------------------------------------------
 
@@ -83,14 +98,25 @@ CREATE TABLE IF NOT EXISTS `item_price` (
   `discount_type` int(11) NOT NULL,
   `deleted` tinyint(4) NOT NULL,
   PRIMARY KEY (`itemprice_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `item_price`
 --
 
 INSERT INTO `item_price` (`itemprice_id`, `itemprice_code`, `unit_price`, `discount_type`, `deleted`) VALUES
-(1, 'IP_001', 270.00, 1, 0);
+(2, 'RC044_Samba', 95.00, 1, 0),
+(3, 'RC044_Nadu', 70.00, 1, 0),
+(4, 'RC044_Kekulu', 80.00, 1, 0),
+(5, 'BT321_cck', 55.00, 1, 0),
+(6, 'BT321_Mr', 35.00, 1, 0),
+(7, 'BT321_Lpf', 66.00, 1, 0),
+(8, 'SP901_Sunl', 30.00, 1, 0),
+(9, 'SP901_Vim', 40.00, 1, 0),
+(10, 'SP901_Lux', 45.00, 1, 0),
+(11, 'ND441_Nd', 120.00, 1, 0),
+(12, 'EG020_Eg', 195.00, 1, 0),
+(13, 'CO116_Cc', 172.00, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +133,18 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `deleted` tinyint(4) NOT NULL,
   PRIMARY KEY (`stock_id`),
   UNIQUE KEY `item_id` (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `stock`
+--
+
+INSERT INTO `stock` (`stock_id`, `item_id`, `itemprice_id`, `qty`, `min_qty`, `deleted`) VALUES
+(8, 10, 6, 500, 20, 0),
+(9, 14, 10, 330, 20, 0),
+(10, 6, 2, 200, 10, 0),
+(11, 17, 13, 100, 10, 0),
+(12, 7, 3, 200, 15, 0);
 
 -- --------------------------------------------------------
 
