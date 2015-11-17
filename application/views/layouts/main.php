@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>EStore - An Inventory System</title>
-        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet"/>
+        <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" />
     </head>
     <body>
         <div id="main-div">
@@ -66,8 +66,8 @@
             </footer>
         </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/custom.js" type="text/javascript"></script>
     </body>
 </html>
