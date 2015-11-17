@@ -1,4 +1,4 @@
-<div id="bill-form" class="panel panel-default">
+<div id="addbill-form" class="panel panel-default">
     <div class="panel-heading" class="panel-heading">
         <h4 align="left">Billing Form</h4>
          <h4 align="center">Total : </h4>
@@ -22,7 +22,7 @@
                 <input class="form-control" name="discount"></input>
             </div>
              <div class="form-group">
-                <label for="qty">QTY</label>
+                <label for="qty">Qty</label>
                 <input class="form-control" name="quantity"></input>
             </div>
             <div class="form-group">

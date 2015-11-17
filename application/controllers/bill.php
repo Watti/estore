@@ -25,7 +25,18 @@ class Bill extends CI_Controller {
         
         $this->load->model('bill_model');
 
-        $data['main_content'] = "bill_form";
+        $data['main_content'] = "bill_view";
+        $this->load->view("layouts/main", $data);
+    }
+    
+    public function add() {
+        if ($this->isAccessDenied("bill/add"))
+        {
+            redirect(base_url());
+        }
+        
+        $this->load->model('bill_model');
+        $data['main_content'] = "addbill_form";
         $this->load->view("layouts/main", $data);
     }
 

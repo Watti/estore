@@ -48,7 +48,13 @@ function hasPermission($url) {
                             </li>
                         <?php endif; ?>
                         <?php if (hasPermission("bill")) : ?>
-                            <li><a href="<?php echo base_url(); ?>bill">Billing</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Billing <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo base_url(); ?>bill/add">Add Bill</a></li>
+                                    <li><a href="<?php echo base_url(); ?>bill">Current Bills</a></li>
+                                </ul>
+                            </li>                            
                         <?php endif; ?>
                         <li><a href="<?php echo base_url(); ?>">Orders</a></li>
                         <li><a href="<?php echo base_url(); ?>">Reports</a></li>
