@@ -189,10 +189,10 @@ CREATE TABLE IF NOT EXISTS `usertype` (
 --
 
 INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
-(1, 'DEV', ''),
-(2, 'MANAGER', ''),
-(3, 'STORE KEEPER', ''),
-(4, 'CASHIER', '');
+(1, 'DEV', 'bill,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
+(2, 'MANAGER', 'bill,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
+(3, 'STORE KEEPER', 'item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
+(4, 'CASHIER', 'bill,bill/add_db');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
