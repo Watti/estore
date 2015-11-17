@@ -169,7 +169,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `usertype_id`, `created_date`, `display_name`, `active`) VALUES
 (1, 'shan', '202cb962ac59075b964b07152d234b70', 2, '2015-11-14 04:44:36', 'Shan', 1),
-(2, 'indunil', '202cb962ac59075b964b07152d234b70', 2, '2015-11-14 04:44:36', 'Indunil', 1);
+(2, 'indunil', '202cb962ac59075b964b07152d234b70', 2, '2015-11-14 04:44:36', 'Indunil', 1),
+(3, 'anil', '202cb962ac59075b964b07152d234b70', 4, '2015-11-17 16:00:31', 'Anil(Cashier)', 1),
+(4, 'sunil', '202cb962ac59075b964b07152d234b70', 3, '2015-11-17 16:38:07', 'Sunil(Stock Keeper)', 1);
 
 -- --------------------------------------------------------
 
@@ -189,10 +191,10 @@ CREATE TABLE IF NOT EXISTS `usertype` (
 --
 
 INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
-(1, 'DEV', 'bill,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
-(2, 'MANAGER', 'bill,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
+(1, 'DEV', 'bill,bill/add,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
+(2, 'MANAGER', 'bill,bill/add,bill/add_db,item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
 (3, 'STORE KEEPER', 'item,item/add,item/add_db,item/update,item/update_db,item/delete,itemcategory,itemcategory/add,itemcategory/add_db,itemcategory/update,itemcategory/update_db,itemcategory/delete,itemprice,itemprice/add,itemprice/add_db,itemprice/update,itemprice/update_db,itemprice/delete,stock,stock/add,stock/add_db,stock/update,stock/update_db,stock/delete'),
-(4, 'CASHIER', 'bill,bill/add_db');
+(4, 'CASHIER', 'bill,bill/add,bill/add_db');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
