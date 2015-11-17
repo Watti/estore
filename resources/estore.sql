@@ -160,3 +160,15 @@ INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE IF NOT EXISTS `bill` (
+  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stock_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `discount` float NOT NULL DEFAULT '0',
+  `total` float NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0',
+  `date` date NOT NULL,
+  PRIMARY KEY (`bill_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
