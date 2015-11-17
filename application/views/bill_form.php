@@ -1,10 +1,10 @@
-<div id="addbill-form" class="panel panel-default">
+<div id="bill-form" class="panel panel-default">
     <div class="panel-heading" class="panel-heading">
         <h4 align="left">Billing Form</h4>
          <h4 align="center">Total : </h4>
     </div>
     <div class="panel-body">
-        <form method="post" action="<?php echo base_url(); ?>addbill/add_db">
+        <form method="post" action="<?php echo base_url(); ?>bill/add_db">
             <div class="form-group">
                 <label for="item_code">Item Code</label>
                 <input class="form-control" type="text" name="item_id" />

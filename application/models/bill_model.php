@@ -1,6 +1,6 @@
 <?php
 
-class AddBill_model extends CI_Model {
+class Bill_model extends CI_Model {
 
     public function add_biling_item() {
        $data = array(
