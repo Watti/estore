@@ -13,7 +13,8 @@ function openAddItemWindow()
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4">
-                <h5><strong><em>Date/Time : 2015/03/25 09:32</em></strong></h5>
+                <h5><strong><em>Date/Time : <?php date_default_timezone_set('Asia/Colombo');
+echo date('m/d/Y h:i:s a', time());?></em></strong></h5>
             </div>
         </div>
         <div class="row">
@@ -22,7 +23,7 @@ function openAddItemWindow()
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4">
-                <h5><strong><em>Billed By : Kumudu</em></strong></h5>
+                <h5><strong><em>Billed By : <?php echo $this->session->userdata('display_name'); ?></em></strong></h5>
             </div>
         </div>
     </div>
