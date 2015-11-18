@@ -22,9 +22,6 @@ class Bill extends CI_Controller {
         {
             redirect(base_url());
         }
-        
-        $this->load->model('bill_model');
-
         $data['main_content'] = "bill_view";
         $this->load->view("layouts/main", $data);
     }
@@ -36,6 +33,15 @@ class Bill extends CI_Controller {
         }
         
         $this->load->model('bill_model');
+        $this->load->model('sales_model');
+        $this->load->model('stock_model');
+        $this->load->model('itemprice_model');
+        $this->load->library('billstatus');
+        $this->load->library('paymentmethod');
+        $uId = $this->session->userdata('user_id');
+        $payMethod = PaymentMethod::CASH;
+        $billStatus = BillStatus::PENDING;
+        $this->bill_model->add_biling_item($uId,0,$payMethod,$billStatus);
         $data['main_content'] = "addbill_form";
         $this->load->view("layouts/main", $data);
     }
@@ -45,10 +51,6 @@ class Bill extends CI_Controller {
         {
             redirect(base_url());
         }
-
-        $this->load->model('bill_model');
-        $this->bill_model->add_biling_item();
-
         redirect(base_url() . 'bill');
     }
 

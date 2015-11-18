@@ -208,8 +208,8 @@ CREATE TABLE IF NOT EXISTS `sale` (
   `quantity` int(11) NOT NULL,
   `discount` float NOT NULL DEFAULT '0',
   `total` float NOT NULL,
-  `deleted` int(11) NOT NULL DEFAULT '0',
   `date` date NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`sale_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -221,5 +221,6 @@ CREATE TABLE IF NOT EXISTS `bill` (
   `amount` float NOT NULL DEFAULT '0',
   `payment_method` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-Cash, 2-Credit, 3-Card, 4-Cheque',
   `status` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1-success, 2-pending, 3-suspended',
+  `deleted` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bill_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

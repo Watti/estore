@@ -2,16 +2,17 @@
 
 class Bill_model extends CI_Model {
 
-    public function add_biling_item() {
+    public function add_biling_item($user_id, $amount, $payment_method, $status) {
         $data = array(
-            'item_id' => $this->input->post('item_id'),
-            'quantity' => $this->input->post('quantity'),
-            'discount' => $this->input->post('discount'),
-            'total' => $this->input->post('total'),
+            'user_id' => $user_id,
+            'amount' => $amount,
+            'payment_method' => $payment_method,
+            'status' => $status,
             'deleted' => 0
         );
 
         $this->db->insert('bill', $data);
+        //echo $data;
     }
 
     public function get_all_bills() {
