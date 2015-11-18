@@ -12,7 +12,9 @@ class Bill_model extends CI_Model {
         );
 
         $this->db->insert('bill', $data);
-        //echo $data;
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
     }
 
     public function get_all_bills() {

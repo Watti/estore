@@ -36,12 +36,16 @@ class Bill extends CI_Controller {
         $this->load->model('sales_model');
         $this->load->model('stock_model');
         $this->load->model('itemprice_model');
+        
         $this->load->library('billstatus');
         $this->load->library('paymentmethod');
+        
         $uId = $this->session->userdata('user_id');
         $payMethod = PaymentMethod::CASH;
         $billStatus = BillStatus::PENDING;
-        $this->bill_model->add_biling_item($uId,0,$payMethod,$billStatus);
+        
+        $billId = $this->bill_model->add_biling_item($uId,0,$payMethod,$billStatus);
+        $data['bill_id'] = base64_encode(urlencode($billId));
         $data['main_content'] = "addbill_form";
         $this->load->view("layouts/main", $data);
     }

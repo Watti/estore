@@ -9,7 +9,7 @@ function openAddItemWindow()
         <!--<h4 align="left">Billing Form</h4>-->
         <div class="row">
             <div class="col-md-4">
-                <h5><strong><em>Bill ID : 0124403</em></strong></h5>
+                <h5><strong><em>Bill ID : <?php echo base64_decode(urldecode($bill_id)); ?></em></strong></h5>
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4">
