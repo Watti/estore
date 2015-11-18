@@ -201,13 +201,25 @@ INSERT INTO `usertype` (`usertype_id`, `usertype_name`, `permission`) VALUES
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
-CREATE TABLE IF NOT EXISTS `bill` (
-  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sale` (
+  `sale_id` int(11) NOT NULL AUTO_INCREMENT,
   `stock_id` int(11) NOT NULL,
+  `bill_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `discount` float NOT NULL DEFAULT '0',
   `total` float NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0',
   `date` date NOT NULL,
-  PRIMARY KEY (`bill_id`)
+  PRIMARY KEY (`sale_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+
+CREATE TABLE IF NOT EXISTS `bill` (
+  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` float NOT NULL DEFAULT '0',
+  `payment_method` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-Cash, 2-Credit, 3-Card, 4-Cheque',
+  `status` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1-success, 2-pending, 3-suspended',
+  PRIMARY KEY (`bill_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
