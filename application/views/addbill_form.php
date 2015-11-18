@@ -1,20 +1,21 @@
 <script>
-function openAddItemWindow()
-{
-    window.open("", "Add_Bill_Item", "modal");
-}
+    function openAddItemWindow()
+    {
+        window.open("", "Add_Bill_Item", "modal");
+    }
 </script>
 <div id="addbill-form" class="panel panel-default">
     <div class="panel-heading container-fluid">
         <!--<h4 align="left">Billing Form</h4>-->
         <div class="row">
             <div class="col-md-4">
-                <h5><strong><em>Bill ID : <?php echo base64_decode(urldecode($bill_id)); ?></em></strong></h5>
+                <h5><strong><em>Bill ID : <?php echo $this->session->billingdata('current_bill_id'); ?></em></strong></h5>
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4">
                 <h5><strong><em>Date/Time : <?php date_default_timezone_set('Asia/Colombo');
-echo date('m/d/Y h:i:s a', time());?></em></strong></h5>
+echo date('m/d/Y h:i:s a', time());
+?></em></strong></h5>
             </div>
         </div>
         <div class="row">

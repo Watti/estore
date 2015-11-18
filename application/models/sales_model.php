@@ -2,14 +2,13 @@
 
 class Sales_model extends CI_Model {
 
-    public function add_item() {
+    public function add_item($stock_id, $bill_id, $quantity,$discount,$total) {
         $data = array(
-            'stock_id' => $this->input->post('stock_id'),
-            'bill_id' => $this->input->post('bill_id'),
-            'quantity' => $this->input->post('quantity'),
-            'discount' => $this->input->post('discount'),
-            'total' => $this->input->post('total'),
-            'date' => $this->input->post('date'),
+            'stock_id' => $stock_id,
+            'bill_id' => $bill_id,
+            'quantity' => $quantity,
+            'discount' => $discount,
+            'total' => $total,
             'deleted' => 0
         );
 

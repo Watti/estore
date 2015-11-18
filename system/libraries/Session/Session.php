@@ -678,6 +678,34 @@ class CI_Session {
 		return $userdata;
 	}
 
+        public function billingdata($key = NULL)
+	{
+		if (isset($key))
+		{
+			return isset($_SESSION[$key]) ? $_SESSION[$key] : NULL;
+		}
+		elseif (empty($_SESSION))
+		{
+			return array();
+		}
+
+		$billingdata = array();
+		$_exclude = array_merge(
+			array('__ci_vars'),
+			$this->get_flash_keys(),
+			$this->get_temp_keys()
+		);
+
+		foreach (array_keys($_SESSION) as $key)
+		{
+			if ( ! in_array($key, $_exclude, TRUE))
+			{
+				$billingdata[$key] = $_SESSION[$key];
+			}
+		}
+
+		return $billingdata;
+	}
 	// ------------------------------------------------------------------------
 
 	/**
@@ -704,6 +732,21 @@ class CI_Session {
 		$_SESSION[$data] = $value;
 	}
 
+        
+        public function set_billingdata($data, $value = NULL)
+	{
+		if (is_array($data))
+		{
+			foreach ($data as $key => &$value)
+			{
+				$_SESSION[$key] = $value;
+			}
+
+			return;
+		}
+
+		$_SESSION[$data] = $value;
+	}
 	// ------------------------------------------------------------------------
 
 	/**

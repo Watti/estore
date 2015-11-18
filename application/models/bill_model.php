@@ -26,4 +26,14 @@ class Bill_model extends CI_Model {
         return FALSE;
     }
 
+    public function get_bill_by_id($bill_id) {
+        $this->db->where('bill_id', $bill_id);
+        $result = $this->db->get('bill');
+
+        if ($result->num_rows() == 1) {
+            return $result->row(0);
+        }
+        return FALSE;
+    }
+
 }
