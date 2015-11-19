@@ -72,3 +72,7 @@
     position: absolute;
     background-color: white;
 }
+
+#addbillitem-form-wrapper {
+    width: 90%;
+}

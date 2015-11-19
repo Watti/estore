@@ -65,7 +65,8 @@ class Stock_model extends CI_Model {
     }
 
     public function get_matching_items($item_code) {
-        $sql = "SELECT stock.stock_id,item.item_id,item.item_code,item.item_name,stock.itemprice_id,item.unit ".
+        $sql = "SELECT stock.stock_id,item.item_id,item.item_code,item.item_name,".
+                "stock.itemprice_id,item.unit,item.itemcategory_id,item.description ".
                 "FROM item JOIN stock ON item.item_id=stock.item_id AND item.item_code LIKE '%" .
                 $this->db->escape_like_str($item_code) . "%'";
         $qry = $this->db->query($sql);

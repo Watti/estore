@@ -1,9 +1,9 @@
-<script>
-    function openAddItemWindow()
-    {
-        window.open("", "Add_Bill_Item", "modal").focus();
-    }
-</script>
+<?php
+//    if (isset($bill_id))
+//    {
+//        $current_bill_id = urlencode(base64_encode($bill_id));
+//    }
+?>
 <div id="addbill-form" class="panel panel-default">
     <div class="panel-heading container-fluid">
         <!--<h4 align="left">Billing Form</h4>-->
@@ -13,9 +13,10 @@
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4">
-                <h5><strong><em>Date/Time : <?php date_default_timezone_set('Asia/Colombo');
-echo date('m/d/Y h:i:s a', time());
-?></em></strong></h5>
+                <h5><strong><em>Date/Time : <?php
+                            date_default_timezone_set('Asia/Colombo');
+                            echo date('m/d/Y h:i:s a', time());
+                            ?></em></strong></h5>
             </div>
         </div>
         <div class="row">
@@ -44,15 +45,39 @@ echo date('m/d/Y h:i:s a', time());
                     </thead>
                     <tbody>
                         <?php
-                        $allbills = $this->bill_model->get_all_bills();
+                        if (isset($bill_id)):
+                            $line = 0;
+                            $bill_items = $this->sale_model->get_billitems_for_bill_id($bill_id);
+                            if ($bill_items):
+                                foreach ($bill_items as $bill_item):
+                                    $stock_item = $this->stock_model->get_stockitem_by_id($bill_item->stock_id);
+                                    $item = $this->item_model->get_item_by_id($stock_item->item_id);
+                                    $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
+                                    ?>
+                                    <tr>
+                                        <td><?php echo ++$line; ?></td>
+                                        <td><?php echo $item->item_code; ?></td>
+                                        <td><?php echo $item->item_name; ?></td>
+                                        <td><?php echo $itemprice->unit_price; ?></td>
+                                        <td><?php echo $bill_item->quantity; ?></td>
+                                        <td><?php echo $itemprice->discount_type; ?></td>
+                                        <td><?php echo $bill_item->total; ?></td>
+                                        <td>Actions</td>
+                                    </tr>
+                                    <?php
+                                endforeach;
+                            else:
+                                echo '<tr><td colspan="8">No Entries</td></tr>';
+                            endif;
+                        else :
+                            echo '<tr><td colspan="8">No Entries</td></tr>';
+                        endif;
                         ?>
-                        <tr>
-                            <td colspan="8">No Entries</td>
-                        </tr>
                         <tr>
                             <td colspan="7">&nbsp;</td>
                             <td>
-                                <a class="btn btn-primary" href="#" onclick="openAddItemWindow()" role="button">Add Item</a>
+                                <a class="btn btn-primary" href="<?php echo base_url() . 'bill/add_billitem/' . urlencode(base64_encode($bill_id)); ?>" 
+                                   role="button">Add Item</a>
                             </td>
                         </tr>
                     </tbody>
@@ -95,9 +120,6 @@ echo date('m/d/Y h:i:s a', time());
             <div class="col-md-4">
                 <h4><strong><em>Gross Amount : 2,420.50</em></strong></h4>
                 <h4><strong><em>Net Amount : 2,420.50</em></strong></h4>
-                <h4><strong><em>Cash : 2,420.50</em></strong></h4>
-                <hr/>
-                <h4><strong><em>Change : 2,420.50</em></strong></h4>
             </div>
         </div>
     </div>
