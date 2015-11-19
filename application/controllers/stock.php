@@ -95,4 +95,15 @@ class Stock extends CI_Controller {
         redirect(base_url() . 'stock');
     }
     
+    // For Ajax
+    public function ajax_get_matching_items($item_code)
+    {
+        //echo 'Item Code : ' . $item_code;
+        $this->load->model('stock_model');
+        $this->load->model('itemprice_model');
+        $matching_items = $this->stock_model->get_matching_items($item_code);
+        
+        $data['stockitems'] = $matching_items;
+        $this->load->view("stockitem_table_view", $data);
+    }
 }

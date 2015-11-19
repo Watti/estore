@@ -30,7 +30,7 @@ class Stock_model extends CI_Model {
         $this->db->where('stock_id', $this->input->post('stock_id'));
         $this->db->update('stock', $data);
     }
-    
+
     public function delete_stockitem($stock_id) {
         $this->db->delete('stock', array('stock_id' => $stock_id));
     }
@@ -44,7 +44,7 @@ class Stock_model extends CI_Model {
         }
         return FALSE;
     }
-    
+
     public function get_stockitem_by_item_id($item_id) {
         $this->db->where('item_id', $item_id);
         $result = $this->db->get('stock');
@@ -58,6 +58,18 @@ class Stock_model extends CI_Model {
     public function get_all_stockitems() {
         $qry = $this->db->get('stock');
 
+        if ($qry->num_rows() > 0) {
+            return $qry->result();
+        }
+        return FALSE;
+    }
+
+    public function get_matching_items($item_code) {
+        $sql = "SELECT stock.stock_id,item.item_id,item.item_code,item.item_name,stock.itemprice_id,item.unit ".
+                "FROM item JOIN stock ON item.item_id=stock.item_id AND item.item_code LIKE '%" .
+                $this->db->escape_like_str($item_code) . "%'";
+        $qry = $this->db->query($sql);
+        
         if ($qry->num_rows() > 0) {
             return $qry->result();
         }

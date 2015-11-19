@@ -20,6 +20,7 @@ function hasPermission($url) {
     <head>
         <meta charset="utf-8">
         <title>EStore - An Inventory System</title>
+        <link href="<?php echo base_url(); ?>assets/css/jquery-ui.css" rel="stylesheet" />
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" />
     </head>
@@ -95,7 +96,8 @@ function hasPermission($url) {
             </footer>
         </div>
 
-        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery-ui.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/custom.js" type="text/javascript"></script>
     </body>

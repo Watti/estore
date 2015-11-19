@@ -66,3 +66,9 @@
     width: 600px;
     margin: 0 auto;
 }
+
+#data {
+    width: 90%;
+    position: absolute;
+    background-color: white;
+}
