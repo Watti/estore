@@ -1,7 +1,7 @@
 <script>
     function openAddItemWindow()
     {
-        window.open("", "Add_Bill_Item", "modal");
+        window.open("", "Add_Bill_Item", "modal").focus();
     }
 </script>
 <div id="addbill-form" class="panel panel-default">
