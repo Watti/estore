@@ -19,10 +19,13 @@
 
         $("#amount" + idno).val((total).toFixed(2));
         
-        var current_gross_amount = $("#gross_amount").html();
-        if (!current_gross_amount){ current_gross_amount = 0; }
-        if (!qty){ current_gross_amount = 0; }
-        var gross_amount = parseFloat(current_gross_amount) + parseFloat(total);
+        var total_acc = 0;
+       
+        $('.amountclass').each(function() {
+            total_acc += parseFloat($(this).val());
+        });
+
+        var gross_amount = total_acc;
                 
         $("#gross_amount").html((gross_amount).toFixed(2));
         $("#net_amount").html((gross_amount).toFixed(2));
@@ -85,7 +88,7 @@
                                         <td class="col-normal"><input type="text" id="unitprice<?php echo $line; ?>" value="<?php echo $itemprice->unit_price; ?>" readonly /></td>
                                         <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
                                         <td><?php echo $itemprice->discount_type; ?></td>
-                                        <td class="col-normal"><input type="text" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
+                                        <td class="col-normal"><input type="text" class="amountclass" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
                                         <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
                                     </tr>
                                     <?php
