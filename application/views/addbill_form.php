@@ -14,15 +14,14 @@
     function onKeyUpFunction(idno) {
         var unitprice = $("#unitprice" + idno).val();
         var qty       = $("#qty" + idno).val();
-        var amount    = $("#amount" + idno).val();
-        var total = parseFloat(amount) + parseFloat(qty) * parseFloat(unitprice);
-//        var element = document.getElementById(unitprice_name);
-//        var price = $(unitprice_name).val();
-//        var qty = element.val();
-//        var amount = $("#amount").val();
+        if (!qty){ qty = 0; }
+        var total = parseFloat(qty) * parseFloat(unitprice);
+
         $("#amount" + idno).val((total).toFixed(2));
         
         var current_gross_amount = $("#gross_amount").html();
+        if (!current_gross_amount){ current_gross_amount = 0; }
+        if (!qty){ current_gross_amount = 0; }
         var gross_amount = parseFloat(current_gross_amount) + parseFloat(total);
                 
         $("#gross_amount").html((gross_amount).toFixed(2));
