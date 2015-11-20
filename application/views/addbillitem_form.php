@@ -5,6 +5,10 @@
             var urlbase = "<?php echo base_url(); ?>stock/ajax_get_matching_items/";
             var arg1 = "<?php echo $bill_id; ?>/";
             var arg2 = $("#additem_text").val();
+            if (arg2) {
+            } else {
+                arg2 = -1;
+            }
             var url = urlbase.concat(arg1).concat(arg2);
             //alert(url);
             $("tbody").load(url, function (responseTxt, statusTxt, xhr) {
@@ -60,9 +64,9 @@
                             </tr> 
                         </tbody>
                     </table>
-<!--                    <div class="form-group">
-                        <input type="submit" value="Add" class="btn btn-primary"/>
-                    </div>-->
+                    <!--                    <div class="form-group">
+                                            <input type="submit" value="Add" class="btn btn-primary"/>
+                                        </div>-->
                     <!--</form>-->        
                 </div>
             </div>
