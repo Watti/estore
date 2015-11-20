@@ -76,3 +76,17 @@
 #addbillitem-form-wrapper {
     width: 90%;
 }
+
+.col-mini, .col-mini input {
+    width: 60px;
+}
+
+.col-normal, .col-normal input {
+    width: 120px;
+}
+
+.bigfont {
+    font-weight: bold;
+    font-size: 18px;
+}
+

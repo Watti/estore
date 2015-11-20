@@ -1,9 +1,34 @@
-<?php
-//    if (isset($bill_id))
-//    {
-//        $current_bill_id = urlencode(base64_encode($bill_id));
-//    }
-?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+//    $(document).ready(function () {
+//        $("#qty").keyup(function () {
+//            var price = $("#unitprice").val();
+//            var qty = $("#qty").val();
+//            var amount = $("#amount").val();
+//            var total = parseFloat(amount) + parseFloat(qty) * parseFloat(price);
+//            //alert(total);
+//            $("#amount").val((total).toFixed(2));
+//        });
+//    });
+    
+    function onKeyUpFunction(idno) {
+        var unitprice = $("#unitprice" + idno).val();
+        var qty       = $("#qty" + idno).val();
+        var amount    = $("#amount" + idno).val();
+        var total = parseFloat(amount) + parseFloat(qty) * parseFloat(unitprice);
+//        var element = document.getElementById(unitprice_name);
+//        var price = $(unitprice_name).val();
+//        var qty = element.val();
+//        var amount = $("#amount").val();
+        $("#amount" + idno).val((total).toFixed(2));
+        
+        var current_gross_amount = $("#gross_amount").html();
+        var gross_amount = parseFloat(current_gross_amount) + parseFloat(total);
+                
+        $("#gross_amount").html((gross_amount).toFixed(2));
+        $("#net_amount").html((gross_amount).toFixed(2));
+    }
+</script>
 <div id="addbill-form" class="panel panel-default">
     <div class="panel-heading container-fluid">
         <!--<h4 align="left">Billing Form</h4>-->
@@ -58,11 +83,11 @@
                                         <td><?php echo ++$line; ?></td>
                                         <td><?php echo $item->item_code; ?></td>
                                         <td><?php echo $item->item_name; ?></td>
-                                        <td><?php echo $itemprice->unit_price; ?></td>
-                                        <td><?php echo $bill_item->quantity; ?></td>
+                                        <td class="col-normal"><input type="text" id="unitprice<?php echo $line; ?>" value="<?php echo $itemprice->unit_price; ?>" readonly /></td>
+                                        <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
                                         <td><?php echo $itemprice->discount_type; ?></td>
-                                        <td><?php echo $bill_item->total; ?></td>
-                                        <td>Actions</td>
+                                        <td class="col-normal"><input type="text" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
+                                        <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
                                     </tr>
                                     <?php
                                 endforeach;
@@ -112,14 +137,24 @@
     </div>
     <div class="panel-footer container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <input class="btn btn-lg btn-success" type="submit" value="Commit">
                 <input class="btn btn-lg btn-warning" type="submit" value="Suspend">
                 <input class="btn btn-lg btn-danger" type="submit" value="Cancel">
             </div>
-            <div class="col-md-4">
-                <h4><strong><em>Gross Amount : 2,420.50</em></strong></h4>
-                <h4><strong><em>Net Amount : 2,420.50</em></strong></h4>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="row">
+                        <!--<div class="col-md-4"><label class="control-label bigfont">Gross Amount : </label></div>-->
+                        <div class="col-md-4"><p class="text-right bigfont">Gross Amount : </p></div>
+                        <div class="col-md-8"><p id="gross_amount" class="bigfont">0.00</p></div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col-md-4"><p class="text-right bigfont">Net Amount : </p></div>
+                        <div class="col-md-8"><p id="net_amount" class="bigfont">0.00</p></div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>
