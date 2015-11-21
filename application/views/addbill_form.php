@@ -14,8 +14,10 @@
     function onKeyUpFunction(idno) {
         var unitprice = $("#unitprice" + idno).val();
         var qty       = $("#qty" + idno).val();
+        var discount  = $("#discount" + idno).val();
         if (!qty){ qty = 0; }
-        var total = parseFloat(qty) * parseFloat(unitprice);
+        //alart( discount);
+        var total = parseFloat(qty) * ((100- parseFloat(discount)) * 0.01 * parseFloat(unitprice));
 
         $("#amount" + idno).val((total).toFixed(2));
         
@@ -87,7 +89,7 @@
                                         <td><?php echo $item->item_name; ?></td>
                                         <td class="col-normal"><input type="text" id="unitprice<?php echo $line; ?>" value="<?php echo $itemprice->unit_price; ?>" readonly /></td>
                                         <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
-                                        <td><?php echo $itemprice->discount_type; ?></td>
+                                        <td class="col-mini" ><input type="text" id="discount<?php echo $line; ?>" value="<?php echo $itemprice->discount_type;?>" readonly /></td>
                                         <td class="col-normal"><input type="text" class="amountclass" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
                                         <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
                                     </tr>
