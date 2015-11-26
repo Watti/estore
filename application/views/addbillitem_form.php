@@ -1,23 +1,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#additem_text").keyup(function () {
+    $(document).ready(function() {
+        $("#additem_text").keyup(function() {
             var urlbase = "<?php echo base_url(); ?>stock/ajax_get_matching_items/";
-            var arg1 = "<?php echo $bill_id; ?>/";
+            var arg1 = $("#billId").val();
+            //alert(arg1);
             var arg2 = $("#additem_text").val();
             if (arg2) {
             } else {
                 arg2 = -1;
             }
-            var url = urlbase.concat(arg1).concat(arg2);
+
+            var url = urlbase.concat(arg2);
+            if (arg1)
+                url = url.concat("/").concat(arg1);
+
             //alert(url);
-            $("tbody").load(url, function (responseTxt, statusTxt, xhr) {
+            $("tbody").load(url, function(responseTxt, statusTxt, xhr) {
                 if (statusTxt == "error") {
                     alert("Error: " + xhr.status + ": " + xhr.statusText);
                 }
             });
         });
-        $("#sh").click(function () {
+        $("#sh").click(function() {
             var v = $("tbody").html();
             alert(v);
         });
@@ -44,8 +49,11 @@
             <div class="panel-body">
                 <!--<form method="post" action="<php echo base_url(); ?>bill/add/<php echo urlencode(base64_encode($bill_id)); ?>">-->
                 <div class="form-group">
-                    <label for="item_code">Item Code</label>
-                    <input id="additem_text" class="form-control" type="text" name="itemprice_code" />
+                    <label for="item_code">Item Code </label> 
+                    <input id="additem_text" class="form-control" type="text" name="itemprice_code" />           
+                    <input id="billId" class="form-control" type="hidden" name="billid" value="<?php if (isset($bill_id)): echo urlencode(base64_encode($bill_id));
+endif;
+?>" />
                 </div>
                 <div class="form-group">
                     <table class="table table-hover table-condensed table-bordered">

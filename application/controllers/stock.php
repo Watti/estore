@@ -90,8 +90,8 @@ class Stock extends CI_Controller {
     }
 
     // For Ajax
-    public function ajax_get_matching_items($bill_id, $item_code) {
-        if (isset($bill_id) && isset($item_code)) {
+    public function ajax_get_matching_items($item_code, $bill_id = NULL) {
+        if (isset($item_code)) {
             if ($item_code == -1) {
                 $item_code = '';
             }
@@ -102,7 +102,8 @@ class Stock extends CI_Controller {
             $matching_items = $this->stock_model->get_matching_items($item_code);
 
             $data['stockitems'] = $matching_items;
-            $data['bill_id'] = $bill_id;
+            if (isset($bill_id))
+                $data['bill_id'] = base64_decode(urldecode($bill_id));
             $this->load->view("stockitem_table_view", $data);
         }
     }

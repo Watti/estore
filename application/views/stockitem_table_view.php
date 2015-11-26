@@ -16,7 +16,9 @@ if ($stockitems) {
         echo '<td>' . $itemprice->unit_price . '</td>';
         echo '<td>';
         echo '<form action="' . base_url() . 'bill/add_billitem_db" method="POST">';
-        echo '<input type="hidden" name="bill_id" value="' . $bill_id . '" />';
+        if(isset($bill_id)):
+        echo '<input type="hidden" name="bill_id" value="' . $bill_id. '" />';
+        endif;
         echo '<input type="hidden" name="stock_id" value="' . $item->stock_id . '" />';
         echo '<input type="submit" class="btn btn-success btn-xs" value="Add" />';
         echo '</form>';
