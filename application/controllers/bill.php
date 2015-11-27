@@ -122,23 +122,19 @@ class Bill extends CI_Controller {
         redirect($url);
     }
 
-    //public function update_sale($sale_id, $stock_id, $bill_id, $quantity, $total) {
     public function update_sale() {
 
         $this->load->model('sale_model');
+
         $sale_id = $this->input->post('sale_id');
         $stock_id = $this->input->post('stock_id');
         $bill_id = $this->input->post('bill_id');
         $quantity = $this->input->post('quantity');
         $total = $this->input->post('total');
         $discount = $this->input->post('discount');
-        $this->sale_model->update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount);
 
-        //$data['main_content'] = "addbill_form";
-        //$bill_id = base64_decode(urldecode($bill_id));
+        $this->sale_model->update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount);
         $data['bill_id'] = $bill_id;
-        return $bill_id;
-        //$this->load->view("layouts/main", $data);
     }
 
 }

@@ -1,15 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
-//    $(document).ready(function () {
-//        $("#qty").keyup(function () {
-//            var price = $("#unitprice").val();
-//            var qty = $("#qty").val();
-//            var amount = $("#amount").val();
-//            var total = parseFloat(amount) + parseFloat(qty) * parseFloat(price);
-//            //alert(total);
-//            $("#amount").val((total).toFixed(2));
-//        });
-//    });
+
     function date_time(id)
     {
         date = new Date;
@@ -51,15 +42,8 @@
         if (!qty) {
             qty = 0;
         }
-        //alart( discount);
         var total = parseFloat(qty) * ((100 - parseFloat(discount)) * 0.01 * parseFloat(unitprice));
-        //var urlbase = "<?php echo base_url(); ?>bill/update_sale/";
-        //var URI = urlbase.concat(sale_id).concat("/").concat(stock_id).concat("/").concat(bill_id).concat("/").concat(qty).concat("/").concat(total);
-//        $("tbody").load(url, function(responseTxt, statusTxt, xhr) {
-//                if (statusTxt == "error") {
-//                    alert("Error: " + xhr.status + ": " + xhr.statusText);
-//                }
-//            });
+         
         $.ajax({
             type: 'POST',
             url: "<?php echo base_url(); ?>bill/update_sale/",
@@ -129,6 +113,7 @@
                 </thead>
                 <tbody>
                     <?php
+                    $gross_amount = 0;
                     if (isset($bill_id)):
                         $line = 0;
                         $bill_items = $this->sale_model->get_billitems_for_bill_id($bill_id);
@@ -137,6 +122,7 @@
                                 $stock_item = $this->stock_model->get_stockitem_by_id($bill_item->stock_id);
                                 $item = $this->item_model->get_item_by_id($stock_item->item_id);
                                 $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
+                                $gross_amount+=$bill_item->total; 
                                 ?>
                                 <tr>
                                     <td><?php echo ++$line; ?></td>
@@ -218,11 +204,11 @@
                 <div class="row">
                     <!--<div class="col-md-4"><label class="control-label bigfont">Gross Amount : </label></div>-->
                     <div class="col-md-4"><p class="text-right bigfont">Gross Amount : </p></div>
-                    <div class="col-md-8"><p id="gross_amount" class="bigfont">0.00</p></div>
+                    <div class="col-md-8"><p id="gross_amount" class="bigfont"><?php echo $gross_amount; ?></p></div>
                 </div>                    
                 <div class="row">
                     <div class="col-md-4"><p class="text-right bigfont">Net Amount : </p></div>
-                    <div class="col-md-8"><p id="net_amount" class="bigfont">0.00</p></div>
+                    <div class="col-md-8"><p id="net_amount" class="bigfont"><?php echo $gross_amount; ?></p></div>
                 </div>
 
             </div>
