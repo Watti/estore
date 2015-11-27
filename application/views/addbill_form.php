@@ -30,8 +30,7 @@
         setTimeout('date_time("' + id + '");', '1000');
         return true;
     }
-
-    function onKeyUpFunction(idno) {
+ function onKeyUpFunction(idno) {
         var unitprice = $("#unitprice" + idno).val();
         var qty = $("#qty" + idno).val();
         var discount = $("#discount" + idno).val();
@@ -53,6 +52,46 @@
             },
             error: function(ts) {
                // alert(ts.responseText)
+            }
+        });
+        //alert("sale id = "+sale_id +" - stock id - "+stock_id+ "bill id - "+bill_id);
+
+        $("#amount" + idno).val((total).toFixed(2));
+
+        var total_acc = 0;
+
+        $('.amountclass').each(function() {
+            total_acc += parseFloat($(this).val());
+        });
+
+        var gross_amount = total_acc;
+
+        $("#gross_amount").html((gross_amount).toFixed(2));
+        $("#net_amount").html((gross_amount).toFixed(2));
+    }
+    
+    function removeMe(idno) {
+        var unitprice = $("#unitprice" + idno).val();
+        var qty = $("#qty" + idno).val();
+        var discount = $("#discount" + idno).val();
+        var sale_id = $("#sale_id" + idno).val();
+        var stock_id = $("#stock_id" + idno).val();
+        var bill_id = $("#bill_id" + idno).val();
+
+        if (!qty) {
+            qty = 0;
+        }
+        var total = parseFloat(qty) * ((100 - parseFloat(discount)) * 0.01 * parseFloat(unitprice));
+         
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url(); ?>bill/remove_sale/",
+            data: {'sale_id': sale_id, 'stock_id': stock_id, 'bill_id': bill_id},
+            dataType: 'json',
+            success: function(data) {
+            },
+            error: function(ts) {
+                alert(ts.responseText)
             }
         });
         //alert("sale id = "+sale_id +" - stock id - "+stock_id+ "bill id - "+bill_id);
@@ -143,7 +182,7 @@
                             <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
                             <td class="col-mini" ><input type="text" id="discount<?php echo $line; ?>" value="<?php echo $itemprice->discount_type; ?>" readonly /></td>
                             <td class="col-normal"><input type="text" class="amountclass" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
-                            <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
+                            <td><a onclick="removeMe(<?php echo $line; ?>)" class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
                             </tr>
 
                             <?php

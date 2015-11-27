@@ -136,5 +136,17 @@ class Bill extends CI_Controller {
         $this->sale_model->update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount);
         $data['bill_id'] = $bill_id;
     }
+    
+    public function remove_sale() {
+
+        $this->load->model('sale_model');
+
+        $sale_id = $this->input->post('sale_id');
+        $stock_id = $this->input->post('stock_id');
+        $bill_id = $this->input->post('bill_id');
+
+        $this->sale_model->remove($sale_id, $stock_id, $bill_id);
+        $data['bill_id'] = $bill_id;
+    }
 
 }

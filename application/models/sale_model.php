@@ -57,4 +57,9 @@ class Sale_model extends CI_Model {
         return FALSE;
     }
 
+    public function remove($sale_id, $stock_id, $bill_id) {
+       
+        $this->db->delete('sale', array('sale_id' => $sale_id, 'stock_id'=>$stock_id, 'bill_id'=>$bill_id));
+    }
+
 }
