@@ -83,7 +83,13 @@ class Bill extends CI_Controller {
 //            redirect(base_url());
 //        }
         if (isset($bill_id)) {
-            //$bill_id = base64_decode(urldecode($bill_id));
+            $bill_id = base64_decode(urldecode($bill_id));
+
+            $this->load->model('sale_model');
+            $bill_items = $this->sale_model->get_billitems_for_bill_id($bill_id);
+//            foreach ($bill_items as $item) {
+//                $this->sale_model->update_quantity_and_total($item['sale_id'],  $item['stock_id'], $bill_id, $item[""], $item[]);
+//            }
             $data['bill_id'] = $bill_id;
         }
         $data['main_content'] = "addbillitem_form";
@@ -114,6 +120,25 @@ class Bill extends CI_Controller {
         }
         $url = base_url() . 'bill/add/' . urlencode(base64_encode($bill_id));
         redirect($url);
+    }
+
+    //public function update_sale($sale_id, $stock_id, $bill_id, $quantity, $total) {
+    public function update_sale() {
+
+        $this->load->model('sale_model');
+        $sale_id = $this->input->post('sale_id');
+        $stock_id = $this->input->post('stock_id');
+        $bill_id = $this->input->post('bill_id');
+        $quantity = $this->input->post('quantity');
+        $total = $this->input->post('total');
+        $discount = $this->input->post('discount');
+        $this->sale_model->update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount);
+
+        //$data['main_content'] = "addbill_form";
+        //$bill_id = base64_decode(urldecode($bill_id));
+        $data['bill_id'] = $bill_id;
+        return $bill_id;
+        //$this->load->view("layouts/main", $data);
     }
 
 }

@@ -26,6 +26,18 @@ class Sale_model extends CI_Model {
         return FALSE;
     }
 
+    public function update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount) {
+
+        $condition_array = array('bill_id' => $bill_id, 'sale_id' => $sale_id, 'stock_id' => $stock_id);
+        $this->db->where($condition_array);
+        $data = array(
+            'quantity' => $quantity,
+            'total' => $total,
+            'discount' => $discount
+        );
+        $this->db->update('sale', $data);
+    }
+
     public function get_billitems_for_bill_id($bill_id) {
         $this->db->where('bill_id', $bill_id);
         $qry = $this->db->get('sale');

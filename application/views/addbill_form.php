@@ -44,11 +44,34 @@
         var unitprice = $("#unitprice" + idno).val();
         var qty = $("#qty" + idno).val();
         var discount = $("#discount" + idno).val();
+        var sale_id = $("#sale_id" + idno).val();
+        var stock_id = $("#stock_id" + idno).val();
+        var bill_id = $("#bill_id" + idno).val();
+
         if (!qty) {
             qty = 0;
         }
         //alart( discount);
         var total = parseFloat(qty) * ((100 - parseFloat(discount)) * 0.01 * parseFloat(unitprice));
+        //var urlbase = "<?php echo base_url(); ?>bill/update_sale/";
+        //var URI = urlbase.concat(sale_id).concat("/").concat(stock_id).concat("/").concat(bill_id).concat("/").concat(qty).concat("/").concat(total);
+//        $("tbody").load(url, function(responseTxt, statusTxt, xhr) {
+//                if (statusTxt == "error") {
+//                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+//                }
+//            });
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url(); ?>bill/update_sale/",
+            data: {'sale_id': sale_id, 'stock_id': stock_id, 'bill_id': bill_id, 'quantity': qty, 'total': total, 'discount': discount},
+            dataType: 'json',
+            success: function(data) {
+            },
+            error: function(ts) {
+               // alert(ts.responseText)
+            }
+        });
+        //alert("sale id = "+sale_id +" - stock id - "+stock_id+ "bill id - "+bill_id);
 
         $("#amount" + idno).val((total).toFixed(2));
 
@@ -69,8 +92,10 @@
         <!--<h4 align="left">Billing Form</h4>-->
         <div class="row">
             <div class="col-md-4">
-                <h5><strong><em>Bill ID : <?php if (isset($bill_id)): echo $bill_id;
-endif; ?></em></strong></h5>
+                <h5><strong><em>Bill ID : <?php
+                            if (isset($bill_id)): echo $bill_id;
+                            endif;
+                            ?></em></strong></h5>
             </div>
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-4"/>
@@ -117,28 +142,40 @@ endif; ?></em></strong></h5>
                                     <td><?php echo ++$line; ?></td>
                                     <td><?php echo $item->item_code; ?></td>
                                     <td><?php echo $item->item_name; ?></td>
-                                    <td class="col-normal"><input type="text" id="unitprice<?php echo $line; ?>" value="<?php echo $itemprice->unit_price; ?>" readonly /></td>
-                                    <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
-                                    <td class="col-mini" ><input type="text" id="discount<?php echo $line; ?>" value="<?php echo $itemprice->discount_type; ?>" readonly /></td>
-                                    <td class="col-normal"><input type="text" class="amountclass" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
-                                    <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
-                                </tr>
-                                <?php
-                            endforeach;
-                        else:
-                            echo '<tr><td colspan="8">No Entries</td></tr>';
-                        endif;
-                    else :
+                            <div class="resultdiv">
+                                <?php if (isset($data)) {
+
+                                    echo $data;
+                                }
+                                ?>
+                            </div>
+                            <input type="hidden" id="stock_id<?php echo $line; ?>" value="<?php echo $bill_item->stock_id; ?>"/>
+                            <input type="hidden" id="bill_id<?php echo $line; ?>" value="<?php echo $bill_id; ?>"/>
+                            <input type="hidden" id="sale_id<?php echo $line; ?>" value="<?php echo $bill_item->sale_id; ?>"/>
+
+                            <td class="col-normal"><input type="text" id="unitprice<?php echo $line; ?>" value="<?php echo $itemprice->unit_price; ?>" readonly /></td>
+                            <td class="col-mini"><input type="text" id="qty<?php echo $line; ?>" onkeyup="onKeyUpFunction(<?php echo $line; ?>);" value="<?php echo $bill_item->quantity; ?>" /></td>
+                            <td class="col-mini" ><input type="text" id="discount<?php echo $line; ?>" value="<?php echo $itemprice->discount_type; ?>" readonly /></td>
+                            <td class="col-normal"><input type="text" class="amountclass" id="amount<?php echo $line; ?>" value="<?php echo $bill_item->total; ?>" readonly /></td>
+                            <td><a class="btn btn-xs btn-danger" href="#" role="button">Remove</a></td>
+                            </tr>
+
+                            <?php
+                        endforeach;
+                    else:
                         echo '<tr><td colspan="8">No Entries</td></tr>';
                     endif;
-                    ?>
-                    <tr>
-                        <td colspan="7">&nbsp;</td>
-                        <td>
-                            <a class="btn btn-primary" href="<?php echo base_url() . 'bill/add_billitem/' . $bill_id; ?>" 
-                               role="button">Add Item</a>
-                        </td>
-                    </tr>
+                else :
+                    echo '<tr><td colspan="8">No Entries</td></tr>';
+                endif;
+                ?>
+                <tr>
+                    <td colspan="7">&nbsp;</td>
+                    <td>
+                        <a class="btn btn-primary" href="<?php echo base_url() . 'bill/add_billitem/' . urlencode(base64_encode($bill_id)) ?>" 
+                           role="button">Add Item</a>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
