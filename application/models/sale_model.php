@@ -58,16 +58,29 @@ class Sale_model extends CI_Model {
     }
 
     public function remove($sale_id, $stock_id, $bill_id) {
-       
-        $this->db->delete('sale', array('sale_id' => $sale_id, 'stock_id'=>$stock_id, 'bill_id'=>$bill_id));
+
+        $this->db->delete('sale', array('sale_id' => $sale_id, 'stock_id' => $stock_id, 'bill_id' => $bill_id));
     }
 
     public function mark_as_deleted($bill_id) {
-       
+
         $this->db->where('bill_id', $bill_id);
         $data = array(
             'deleted' => 1
         );
         $this->db->update('sale', $data);
     }
+
+    public function get_total_for_bill_id($bill_id) {
+        $this->db->group_by('bill_id');
+        $this->db->where('bill_id', $bill_id);
+        $this->db->select_sum('total');
+        $qry = $this->db->get('sale');
+
+        if ($qry->num_rows() > 0) {
+            return $qry->row()->total;
+        }
+        return FALSE;
+    }
+
 }

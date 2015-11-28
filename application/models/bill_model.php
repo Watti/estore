@@ -44,11 +44,20 @@ class Bill_model extends CI_Model {
         $this->db->update('bill', $data);
     }
 
-        public function update_status($bill_id, $status) {
+    public function update_status($bill_id, $status) {
         $this->db->where('bill_id', $bill_id);
         $data = array(
             'status' => $status
         );
         $this->db->update('bill', $data);
     }
+
+    public function update_amount($bill_id, $amount) {
+        $this->db->where('bill_id', $bill_id);
+        $data = array(
+            'amount' => $amount
+        );
+        $this->db->update('bill', $data);
+    }
+
 }

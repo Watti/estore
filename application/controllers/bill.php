@@ -154,31 +154,42 @@ class Bill extends CI_Controller {
 //            redirect(base_url());
 //        }
         if (isset($bill_id)) {
+
             $bill_id = base64_decode(urldecode($bill_id));
             $cancel = $this->input->post('cancel_btn');
             $suspend = $this->input->post('suspend_btn');
+            $commit = $this->input->post('commit_btn');
+
+            $this->load->model('sale_model');
+            $this->load->model('bill_model');
+
             if (strcmp($cancel, "CANCEL") == 0) {
 
-                $this->load->model('sale_model');
-                $this->load->model('bill_model');
                 $this->bill_model->update_as_deleted($bill_id);
                 $this->sale_model->mark_as_deleted($bill_id);
 
                 $bill_id = '';
             } else if (strcmp($suspend, "SUSPEND") == 0) {
 
-                $this->load->model('sale_model');
-                $this->load->model('bill_model');
                 $this->load->library('billstatus');
 
                 $billStatus = BillStatus::SUSPENDED;
 
                 $this->bill_model->update_status($bill_id, $billStatus);
                 $bill_id = '';
+            } else if (strcmp($commit, "COMMIT") == 0) {
+
+                $this->load->library('billstatus');
+                $billStatus = BillStatus::SUCCESS;
+
+                $toatl = $this->sale_model->get_total_for_bill_id($bill_id);
+                $this->bill_model->update_amount($bill_id, $toatl);
+                $this->bill_model->update_status($bill_id, $billStatus);
+                $bill_id = '';
             }
+            $url = base_url() . 'bill/add/' . urlencode(base64_encode($bill_id));
+            redirect($url);
         }
-        $url = base_url() . 'bill/add/' . urlencode(base64_encode($bill_id));
-        redirect($url);
     }
 
 }
