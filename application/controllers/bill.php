@@ -149,13 +149,14 @@ class Bill extends CI_Controller {
         $data['bill_id'] = $bill_id;
     }
 
-    public function cancel_bill($bill_id = NULL) {
+    public function update_bill($bill_id = NULL) {
 //        if ($this->isAccessDenied("bill/add_billitem")) {
 //            redirect(base_url());
 //        }
         if (isset($bill_id)) {
             $bill_id = base64_decode(urldecode($bill_id));
             $cancel = $this->input->post('cancel_btn');
+            $suspend = $this->input->post('suspend_btn');
             if (strcmp($cancel, "CANCEL") == 0) {
 
                 $this->load->model('sale_model');
@@ -163,6 +164,16 @@ class Bill extends CI_Controller {
                 $this->bill_model->update_as_deleted($bill_id);
                 $this->sale_model->mark_as_deleted($bill_id);
 
+                $bill_id = '';
+            } else if (strcmp($suspend, "SUSPEND") == 0) {
+
+                $this->load->model('sale_model');
+                $this->load->model('bill_model');
+                $this->load->library('billstatus');
+
+                $billStatus = BillStatus::SUSPENDED;
+
+                $this->bill_model->update_status($bill_id, $billStatus);
                 $bill_id = '';
             }
         }

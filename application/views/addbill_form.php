@@ -233,10 +233,10 @@
 </div>
 <div class="panel-footer container-fluid">
     <div class="row">
-        <form action="<?php echo base_url() . 'bill/cancel_bill/' . urlencode(base64_encode($bill_id)); ?>" method="post">
+        <form action="<?php echo base_url() . 'bill/update_bill/' . urlencode(base64_encode($bill_id)); ?>" method="post">
         <div class="col-md-7">
-            <input class="btn btn-lg btn-success" type="submit" value="Commit">
-            <input class="btn btn-lg btn-warning" type="submit" value="Suspend">
+            <input name="commit_btn" class="btn btn-lg btn-success" type="submit" value="COMMIT">
+            <input name="suspend_btn" class="btn btn-lg btn-warning" type="submit" value="SUSPEND">
             <input name="cancel_btn" class="btn btn-lg btn-danger" href="" type="submit" value="CANCEL"/>
         </div>
             </form>
