@@ -136,7 +136,7 @@ class Bill extends CI_Controller {
         $this->sale_model->update_quantity_and_total($sale_id, $stock_id, $bill_id, $quantity, $total, $discount);
         $data['bill_id'] = $bill_id;
     }
-    
+
     public function remove_sale() {
 
         $this->load->model('sale_model');
@@ -147,6 +147,27 @@ class Bill extends CI_Controller {
 
         $this->sale_model->remove($sale_id, $stock_id, $bill_id);
         $data['bill_id'] = $bill_id;
+    }
+
+    public function cancel_bill($bill_id = NULL) {
+//        if ($this->isAccessDenied("bill/add_billitem")) {
+//            redirect(base_url());
+//        }
+        if (isset($bill_id)) {
+            $bill_id = base64_decode(urldecode($bill_id));
+            $cancel = $this->input->post('cancel_btn');
+            if (strcmp($cancel, "CANCEL") == 0) {
+
+                $this->load->model('sale_model');
+                $this->load->model('bill_model');
+                $this->bill_model->update_as_deleted($bill_id);
+                $this->sale_model->mark_as_deleted($bill_id);
+
+                $bill_id = '';
+            }
+        }
+        $url = base_url() . 'bill/add/' . urlencode(base64_encode($bill_id));
+        redirect($url);
     }
 
 }

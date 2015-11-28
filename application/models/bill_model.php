@@ -36,4 +36,12 @@ class Bill_model extends CI_Model {
         return FALSE;
     }
 
+    public function update_as_deleted($bill_id) {
+        $this->db->where('bill_id', $bill_id);
+        $data = array(
+            'deleted' => 1
+        );
+        $this->db->update('bill', $data);
+    }
+
 }

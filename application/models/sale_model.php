@@ -62,4 +62,12 @@ class Sale_model extends CI_Model {
         $this->db->delete('sale', array('sale_id' => $sale_id, 'stock_id'=>$stock_id, 'bill_id'=>$bill_id));
     }
 
+    public function mark_as_deleted($bill_id) {
+       
+        $this->db->where('bill_id', $bill_id);
+        $data = array(
+            'deleted' => 1
+        );
+        $this->db->update('sale', $data);
+    }
 }
