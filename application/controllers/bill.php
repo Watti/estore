@@ -22,6 +22,8 @@ class Bill extends CI_Controller {
             redirect(base_url());
         }
         $this->load->model('bill_model');
+        $this->load->model('sale_model');
+        $this->load->model('user_model');
         $data['main_content'] = "bill_view";
         $this->load->view("layouts/main", $data);
     }
