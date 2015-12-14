@@ -35,7 +35,7 @@
                                 <a class="btn btn-warning btn-xs" role="button"
                                    href="<?php echo base_url(); ?>bill/update_bill/<?php echo urlencode(base64_encode($bill->bill_id)); ?>">Pending</a>
                                <?php elseif ($bill->status == 3): ?>
-                                <a class="btn btn-danger btn-xs" role="button" href="#">Canceled</a>
+                                <a class="btn btn-danger btn-xs" role="button" href="<?php echo base_url(); ?>bill/update_bill/<?php echo urlencode(base64_encode($bill->bill_id)); ?>">Suspended</a>
                                <?php else: ?>
                                 An Error Occurred
                             <?php endif; ?>
