@@ -30,7 +30,7 @@
         setTimeout('date_time("' + id + '");', '1000');
         return true;
     }
- function onKeyUpFunction(idno) {
+    function onKeyUpFunction(idno) {
         var unitprice = $("#unitprice" + idno).val();
         var qty = $("#qty" + idno).val();
         var discount = $("#discount" + idno).val();
@@ -42,7 +42,7 @@
             qty = 0;
         }
         var total = parseFloat(qty) * ((100 - parseFloat(discount)) * 0.01 * parseFloat(unitprice));
-         
+
         $.ajax({
             type: 'POST',
             url: "<?php echo base_url(); ?>bill/update_sale/",
@@ -51,7 +51,7 @@
             success: function(data) {
             },
             error: function(ts) {
-               // alert(ts.responseText)
+                // alert(ts.responseText)
             }
         });
         //alert("sale id = "+sale_id +" - stock id - "+stock_id+ "bill id - "+bill_id);
@@ -69,7 +69,7 @@
         $("#gross_amount").html((gross_amount).toFixed(2));
         $("#net_amount").html((gross_amount).toFixed(2));
     }
-    
+
     function removeMe(idno) {
         var unitprice = $("#unitprice" + idno).val();
         var qty = $("#qty" + idno).val();
@@ -82,7 +82,7 @@
             qty = 0;
         }
         var total = parseFloat(qty) * ((100 - parseFloat(discount)) * 0.01 * parseFloat(unitprice));
-         
+
         $.ajax({
             type: 'POST',
             url: "<?php echo base_url(); ?>bill/remove_sale/",
@@ -161,14 +161,15 @@
                                 $stock_item = $this->stock_model->get_stockitem_by_id($bill_item->stock_id);
                                 $item = $this->item_model->get_item_by_id($stock_item->item_id);
                                 $itemprice = $this->itemprice_model->get_item_price_by_id($stock_item->itemprice_id);
-                                $gross_amount+=$bill_item->total; 
+                                $gross_amount+=$bill_item->total;
                                 ?>
                                 <tr>
                                     <td><?php echo ++$line; ?></td>
                                     <td><?php echo $item->item_code; ?></td>
                                     <td><?php echo $item->item_name; ?></td>
                             <div class="resultdiv">
-                                <?php if (isset($data)) {
+                                <?php
+                                if (isset($data)) {
 
                                     echo $data;
                                 }
@@ -234,12 +235,19 @@
 <div class="panel-footer container-fluid">
     <div class="row">
         <form action="<?php echo base_url() . 'bill/update_bill/' . urlencode(base64_encode($bill_id)); ?>" method="post">
-        <div class="col-md-7">
-            <input name="commit_btn" class="btn btn-lg btn-success" type="submit" value="COMMIT">
-            <input name="suspend_btn" class="btn btn-lg btn-warning" type="submit" value="SUSPEND">
-            <input name="cancel_btn" class="btn btn-lg btn-danger" href="" type="submit" value="CANCEL"/>
-        </div>
-            </form>
+           
+            <select name="pay_mode">
+                <option value="1">CASH</option>
+                <option value="2">CREDIT</option>
+                <option value="3">CARD</option>
+                <option value="4">CHEQUE</option>
+            </select>
+            <div class="col-md-7">
+                <input name="commit_btn" class="btn btn-lg btn-success" type="submit" value="COMMIT">
+                <input name="suspend_btn" class="btn btn-lg btn-warning" type="submit" value="SUSPEND">
+                <input name="cancel_btn" class="btn btn-lg btn-danger" href="" type="submit" value="CANCEL"/>
+            </div>
+        </form>
         <div class="col-md-5">
             <div class="row">
                 <div class="row">

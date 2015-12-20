@@ -52,12 +52,23 @@ class Bill_model extends CI_Model {
         $this->db->update('bill', $data);
     }
 
-    public function update_amount($bill_id, $amount) {
+    public function update_amount($bill_id, $amount, $payment_method) {
         $this->db->where('bill_id', $bill_id);
         $data = array(
-            'amount' => $amount
+            'amount' => $amount,
+            'payment_method' => $payment_method
         );
         $this->db->update('bill', $data);
     }
 
+    public function get_sales_by_user_and_date($user_id) {
+        $this->db->where('user_id', $user_id);
+        $date = date("Y-m-d");
+       $this->db->like('date',$date);  
+        $qry = $this->db->get('bill');
+        if ($qry->num_rows() > 0) {
+            return $qry->result();
+        }
+        return FALSE;
+    }
 }

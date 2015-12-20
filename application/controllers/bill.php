@@ -181,11 +181,12 @@ class Bill extends CI_Controller {
                 $bill_id = '';
             } else if (strcmp($commit, "COMMIT") == 0) {
 
+                $payMode = $this->input->post('pay_mode');
                 $this->load->library('billstatus');
                 $billStatus = BillStatus::SUCCESS;
 
                 $toatl = $this->sale_model->get_total_for_bill_id($bill_id);
-                $this->bill_model->update_amount($bill_id, $toatl);
+                $this->bill_model->update_amount($bill_id, $toatl, $payMode);
                 $this->bill_model->update_status($bill_id, $billStatus);
                 $bill_id = '';
             }
